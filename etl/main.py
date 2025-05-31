@@ -1,3 +1,4 @@
+from datetime import datetime
 import pandas as pd
 from sqlalchemy import create_engine
 from typing import Dict
@@ -66,6 +67,12 @@ def _transform(df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
         "sectors": sector_df,
     }
 
+    # add timestamp columns to all tables
+    for table_name, table_df in result.items():
+        now = pd.to_datetime(datetime.now())
+        table_df["created_at"] = now
+        table_df["updated_at"] = now
+
     return result
 
 
@@ -74,7 +81,7 @@ def _load(db_con_string: str, table_to_df: Dict[str, pd.DataFrame]):
 
     with engine.connect() as con:
         for table_name, df in table_to_df.items():
-            df.to_sql(table_name, con)
+            df.to_sql(table_name, con, if_exists="append", index=False)
 
 
 def etl(url: str, db_con_str: str):
@@ -84,7 +91,9 @@ def etl(url: str, db_con_str: str):
 
 
 if __name__ == "__main__":
+    db_con = "sqlite:////Users/payam/Developer/projects/sunshine-list/backend/storage/development.sqlite3"
+
     etl(
         "https://www.ontario.ca/public-sector-salary-disclosure/pssd-assets/files/2024/tbs-pssd-compendium-salary-disclosed-2024-en-utf-8-2025-03-26.csv",
-        "sqlite:////Users/payam/Developer/projects/sunshine-list/backend/storage/development.sqlite3",
+        db_con,
     )
