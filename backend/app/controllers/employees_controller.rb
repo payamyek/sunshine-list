@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   def index
-    @employees = Employee.all
+    @employees = Employee.order(id: :asc).page(params[:page])
     render json: @employees
   end
 
