@@ -39,22 +39,33 @@ def _transform(df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
 
     job_title_df = (
         df[["Job Title", "job_title_id"]]
-        .rename(columns={"Job Title": "job_title", "job_title_id": "id"})
+        .rename(
+            columns={
+                "job_title_id": "id",
+                "Job Title": "name",
+            }
+        )
         .drop_duplicates()
     )
 
     sector_df = (
         df[["Sector", "sector_id"]]
-        .rename(columns={"Sector": "sector", "sector_id": "id"})
+        .rename(
+            columns={
+                "sector_id": "id",
+                "Sector": "name",
+            }
+        )
         .drop_duplicates()
     )
 
     result = {
-        "employee": employee_df,
-        "employer": employer_df,
-        "job_title": job_title_df,
-        "sector": sector_df,
+        "employees": employee_df,
+        "employers": employer_df,
+        "job_titles": job_title_df,
+        "sectors": sector_df,
     }
+
     return result
 
 
@@ -73,4 +84,7 @@ def etl(url: str, db_con_str: str):
 
 
 if __name__ == "__main__":
-    pass
+    etl(
+        "https://www.ontario.ca/public-sector-salary-disclosure/pssd-assets/files/2024/tbs-pssd-compendium-salary-disclosed-2024-en-utf-8-2025-03-26.csv",
+        "sqlite:////Users/payam/Developer/projects/sunshine-list/backend/storage/development.sqlite3",
+    )
