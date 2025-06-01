@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_31_213259) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_01_024920) do
   create_table "employees", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.decimal "salary", precision: 15, scale: 2
-    t.decimal "benefits", precision: 15, scale: 2
+    t.float "salary"
+    t.float "benefits"
     t.integer "employer_id"
     t.integer "sector_id"
     t.integer "job_title_id"

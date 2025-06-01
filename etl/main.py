@@ -5,7 +5,7 @@ from typing import Dict
 
 
 def _extract(url: str) -> pd.DataFrame:
-    return pd.read_csv(url)
+    return pd.read_csv(url, thousands=",")
 
 
 def _transform(df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
