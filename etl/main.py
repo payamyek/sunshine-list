@@ -91,7 +91,7 @@ def etl(url: str, db_con_str: str):
 
 
 if __name__ == "__main__":
-    db_con = "sqlite:////Users/payam/Developer/projects/sunshine-list/backend/storage/development.sqlite3"
+    db_con = "postgresql://payam@localhost:5432/demo_development"
 
     etl(
         "https://www.ontario.ca/public-sector-salary-disclosure/pssd-assets/files/2024/tbs-pssd-compendium-salary-disclosed-2024-en-utf-8-2025-03-26.csv",
