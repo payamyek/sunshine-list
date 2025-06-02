@@ -31,3 +31,11 @@ production:
   password: <%= ENV.fetch("DB_PASSWORD") { "user" } %>
   host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
   port: <%= ENV.fetch("DB_PORT") { 5432 } %>
+
+  cable:
+    adapter: postgresql
+    database: <%= ENV.fetch("DB_NAME") { "railway" } %>
+    username: <%= ENV.fetch("DB_USER") { "postgres" } %>
+    password: <%= ENV.fetch("DB_PASSWORD") { "user" } %>
+    host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
+    port: <%= ENV.fetch("DB_PORT") { 5432 } %>
