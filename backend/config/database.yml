@@ -17,10 +17,26 @@ test:
   database: demo_test
 
 # Use postgres for the production database
-production:
-  <<: *default
+production_env_vars: &production_env_vars
   database: <%= ENV["DB_NAME"] %>
   username: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASSWORD"] %>
   host: <%= ENV["DB_HOST"] %>
   port: <%= ENV["DB_PORT"] %>
+
+production:
+  primary:
+    <<: *default
+    <<: *production_env_vars
+  cache:
+    <<: *default
+    <<: *production_env_vars
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    <<: *production_env_vars
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    <<: *production_env_vars
+    migrations_paths: db/cable_migrate
