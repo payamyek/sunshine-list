@@ -2,6 +2,7 @@ from datetime import datetime
 import pandas as pd
 from sqlalchemy import create_engine
 from typing import Dict
+import os
 
 
 def _extract(url: str) -> pd.DataFrame:
@@ -91,9 +92,7 @@ def etl(url: str, db_con_str: str):
 
 
 if __name__ == "__main__":
-    db_con = "postgresql://payam@localhost:5432/demo_development"
-
     etl(
         "https://www.ontario.ca/public-sector-salary-disclosure/pssd-assets/files/2024/tbs-pssd-compendium-salary-disclosed-2024-en-utf-8-2025-03-26.csv",
-        db_con,
+        os.environ["SUNSHINE_LIST_DB_CONNECTION_STRING"],
     )
