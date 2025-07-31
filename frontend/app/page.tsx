@@ -36,7 +36,7 @@ export function OverviewSnapshot() {
       <GridItem
         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
         icon={<Search className="h-4 w-4 text-black dark:text-neutral-400" />}
-        title="Scary Fast Search Engine"
+        title="Scary Fast Search"
         description="Searching our system is so fast, it will scare you"
       />
     </ul>
@@ -86,7 +86,6 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
 export default function Home() {
   return (
     <GridBackground title="Ontario Sunshine List">
-      <div>Yoo</div>
       <OverviewSnapshot />
     </GridBackground>
   );
