@@ -3,32 +3,40 @@ Employer.destroy_all
 JobTitle.destroy_all
 Sector.destroy_all
 
-Sector.create!([ {
-  name: "Computer Science"
-} ])
+5.times do |index|
+  Sector.create!([ {
+    name: Faker::Company.unique.industry
+  } ])
+end
 
 p "Created #{Sector.count} sector(s)"
 
-JobTitle.create!([ {
-  name: "Software Engineer"
-} ])
+5.times do |index|
+  JobTitle.create!([ {
+    name: Faker::Company.unique.profession
+  } ])
+end
 
 p "Created #{JobTitle.count} job title(s)"
 
-Employer.create!([ {
-  name: "Candu"
-} ])
+5.times do |index|
+  Employer.create!([ {
+    name: Faker::Company.unique.name
+  } ])
+end
 
 p "Created #{Employer.count} employer(s)"
 
-Employee.create!([ {
-  first_name: "Bob",
-  last_name: "Dylan",
-  salary: 102234.24,
-  benefits: 200,
-  employer_id: 1,
-  sector_id: 1,
-  job_title_id: 1
-} ])
+25.times do |index|
+  Employee.create!([ {
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    salary: Faker::Number.within(range: 100000.0..999999.0),
+    benefits: Faker::Number.within(range: 0.0..300.0),
+    employer_id: Faker::Number.within(range: 1..5),
+    sector_id: Faker::Number.within(range: 1..5),
+    job_title_id: Faker::Number.within(range: 1..5)
+  } ])
+end
 
-p "Created #{Employer.count} employee(s)"
+p "Created #{Employee.count} employee(s)"
