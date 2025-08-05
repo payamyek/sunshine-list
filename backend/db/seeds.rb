@@ -31,8 +31,8 @@ p "Created #{Employer.count} employer(s)"
   Employee.create!([ {
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    salary: Faker::Number.within(range: 100000.0..999999.0),
-    benefits: Faker::Number.within(range: 0.0..300.0),
+    salary: Faker::Number.within(range: 100000.0..999999.0).round(2),
+    benefits: Faker::Number.within(range: 0.0..300.0).round(2),
     employer_id: Faker::Number.within(range: 1..5),
     sector_id: Faker::Number.within(range: 1..5),
     job_title_id: Faker::Number.within(range: 1..5)
