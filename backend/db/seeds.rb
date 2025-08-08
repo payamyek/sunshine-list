@@ -3,6 +3,9 @@ Employer.destroy_all
 JobTitle.destroy_all
 Sector.destroy_all
 
+# deterministic data
+Faker::Config.random = Random.new(42)
+
 5.times do |index|
   Sector.create!([ {
     name: Faker::Company.unique.industry
