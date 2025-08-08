@@ -1,6 +1,11 @@
 class EmployeesController < ApplicationController
   def index
-    @employees = Employee.order(id: :asc).page(params[:page]).per(params[:size])
+    if params[:q].present?
+      @employees = Employee.search(params[:q]).order(id: :asc).page(params[:page]).per(params[:size])
+    else
+      @employees = Employee.order(id: :asc).page(params[:page]).per(params[:size])
+    end
+
     render json: @employees, include: [ :sector, :job_title, :employer ]
   end
 
